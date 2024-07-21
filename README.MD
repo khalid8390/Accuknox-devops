@@ -24,6 +24,7 @@ EXPOSE 4499
 
 # Set the startup command
 CMD ["./wisecow.sh"]
+
 3. **Build the Docker image**:
 ```bash
 docker build -t wisecow-app .
