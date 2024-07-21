@@ -57,9 +57,9 @@ docker run -p 8080:80 wisecow-app
         spec:
           containers:
           - name: wisecow
-            image: <your-container-registry>/wisecow-app:latest
+            image: <khalid8390>/wisecow-app:latest
             ports:
-            - containerPort: 80
+            - containerPort: 4499
     ```
 2. **Create Service YAML (`wisecow-service.yaml`)**:
     ```yaml
@@ -73,7 +73,7 @@ docker run -p 8080:80 wisecow-app
       ports:
       - protocol: TCP
         port: 80
-        targetPort: 80
+        targetPort: 4499
       type: LoadBalancer
     ```
 3. **Apply the manifest files**:
