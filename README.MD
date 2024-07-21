@@ -98,5 +98,13 @@ jobs:
       env:
         KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
  Configure Docker and Kubernetes secrets in the GitHub repository settings.
-TLS
+
+
+## TLS Implementation
+1. **Generate TLS Certificates**:
+   - Use tools like Let's Encrypt to generate certificates.
+2. **Configure TLS in Kubernetes Ingress**:
+   - Create an Ingress resource for TLS termination.
+   - Update `wisecow-service.yaml` to use NodePort or ClusterIP type.
+   - Configure Ingress rules for secure communication.
 
