@@ -1,6 +1,7 @@
-1.Clone the repository  https://github.com/nyrahul/wisecow
+#1.Clone the repository  
+https://github.com/nyrahul/wisecow
 
-2.Write Dockerfile:
+#2.Write Dockerfile:
 # Use a base image
 FROM ubuntu:latest
 
@@ -21,14 +22,14 @@ EXPOSE 4499
 
 # Set the startup command
 CMD ["./wisecow.sh"]
-3. Build the Docker image:
+#3. Build the Docker image:
 docker build -t wisecow-app .
-4. Test the Docker image locally:
+#4. Test the Docker image locally:
 docker run -p 8080:80 wisecow-app
 
 
-Kubernetes Deployment
-1.Create Deployment YAML (wisecow-deployment.yaml):
+#Kubernetes Deployment
+#1.Create Deployment YAML (wisecow-deployment.yaml):
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -50,7 +51,7 @@ spec:
         image: <your-container-registry>/wisecow-app:latest
         ports:
         - containerPort: 80
-2.Create Service YAML (wisecow-service.yaml):
+#2.Create Service YAML (wisecow-service.yaml):
 apiVersion: v1
 kind: Service
 metadata:
@@ -63,12 +64,12 @@ spec:
     port: 80
     targetPort: 80
   type: LoadBalancer
-3. Apply the manifest files:
+#3. Apply the manifest files:
 kubectl apply -f wisecow-deployment.yaml
 kubectl apply -f wisecow-service.yaml
 
 
-3.Continuous Integration and Deployment (CI/CD)
+#3.Continuous Integration and Deployment (CI/CD)
 GitHub Actions Workflow:
 Create .github/workflows/ci-cd.yml:
 name: CI/CD Pipeline
@@ -97,13 +98,13 @@ jobs:
       run: kubectl apply -f wisecow-deployment.yaml
       env:
         KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
- Configure Docker and Kubernetes secrets in the GitHub repository settings.
+ #Configure Docker and Kubernetes secrets in the GitHub repository settings.
 
 
 ## TLS Implementation
-1. **Generate TLS Certificates**:
+#1. **Generate TLS Certificates**:
    - Use tools like Let's Encrypt to generate certificates.
-2. **Configure TLS in Kubernetes Ingress**:
+#2. **Configure TLS in Kubernetes Ingress**:
    - Create an Ingress resource for TLS termination.
    - Update `wisecow-service.yaml` to use NodePort or ClusterIP type.
    - Configure Ingress rules for secure communication.
