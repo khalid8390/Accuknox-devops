@@ -138,8 +138,10 @@ spec:
           class: nginx
 ```
 
-2. **Apply the ClusterIssuer
+2. **Apply the ClusterIssuer**:
+ ```bash
 kubectl apply -f cluster-issuer.yaml
+```
 
 3. **Create Kubernetes Ingress Resource with TLS**:
 ```yaml
