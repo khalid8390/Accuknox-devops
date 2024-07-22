@@ -32,7 +32,7 @@ docker build -t wisecow-app .
 ```
 4. **Test the Docker image locally**:
 ```bash
-docker run -p 8080:80 wisecow-app
+docker run -p 4499:4499 wisecow-app
 ```
 
 ## Kubernetes Deployment
@@ -122,20 +122,28 @@ docker run -p 8080:80 wisecow-app
    - Use tools like Let's Encrypt to generate certificates.
    -cluster-issuer.yaml
 ```yaml
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: letsencrypt
+  name: wisecow-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: shaikhk968@gmail.com
-    privateKeySecretRef:
-      name: letsencrypt-private-key
-    solvers:
-    - http01:
-        ingress:
-          class: nginx
+  tls:
+  - hosts:
+    - your-domain.com
+    secretName: wisecow-deployment-tls
+  rules:
+  - host: your-domain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wisecow-service
+            port:
+              number: 80
 ```
 
 2. **Apply the ClusterIssuer**:
