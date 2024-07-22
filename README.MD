@@ -120,8 +120,48 @@ docker run -p 8080:80 wisecow-app
 
 1. **Generate TLS Certificates**:
    - Use tools like Let's Encrypt to generate certificates.
-2. **Configure TLS in Kubernetes Ingress**:
-   - Create an Ingress resource for TLS termination.
-   - Update `wisecow-service.yaml` to use NodePort or ClusterIP type.
-   - Configure Ingress rules for secure communication.
+# cluster-issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: shaikhk968@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-private-key
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+
+2. **Apply the ClusterIssuer
+kubectl apply -f cluster-issuer.yaml
+
+3. **Create Kubernetes Ingress Resource with TLS**:
+   # ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wisecow-deployment
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  tls:
+  - hosts:
+    - your-domain.com
+    secretName: wisecow-deployment-tls
+  rules:
+  - host: your-domain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wisecow-deployment
+            port:
+              number: 80
+
 
