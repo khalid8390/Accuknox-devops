@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wisecow-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: wisecow
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: wisecow
-        image: <your-docker-registry>/wisecow:latest
+        image: khalid8390/wisecow:latest
         ports:
-        - containerPort: 8000
+        - containerPort: 4499
