@@ -175,4 +175,5 @@ Contents System Health Monitoring Script License System Health Monitoring Script
 Features CPU Monitoring: Alerts if CPU usage exceeds a specified threshold. Memory Monitoring: Alerts if memory usage surpasses a defined limit. Disk Monitoring: Alerts if disk space usage exceeds a set threshold. Process Logging: Records a snapshot of running processes. Timestamped Logs: Logs include timestamps for performance history.
 
 ## Automated Backup Solution:
+automate the backup of a specified directory to a remote server or a cloud storage solution
 
