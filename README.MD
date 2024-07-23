@@ -177,6 +177,11 @@ spec:
             port:
               number: 80
 ```
+**Apply the ingress resource**:
+ ```bash
+kubectl apply -f ingress.yaml
+
+```
 ## System health monitoring script
 Contents System Health Monitoring Script License System Health Monitoring Script Purpose The System Health Monitoring Script continuously monitors key performance metrics of a Linux system. It checks CPU usage, memory usage, disk space, and running processes, logging alerts if any metrics exceed predefined thresholds.
 
